@@ -1,0 +1,36 @@
+#!/bin/bash
+
+MAP=(["X0"]="0" ["X9"]="X9" ["XA"]="10"
+["Xa"]="10" ["XF"]="15" ["Xf"]="15" ["X10"]="16"
+["X1F"]="31" ["X1f"]="31" ["XF1"]="241" ["Xf1"]="241"
+["XEA"]="234" ["Xea"]="234" ["XeA"]="234" ["XAe"]="174"
+["XFF"]="255" ["Xff"]="255" ["X1234"]="4660" ["X7FFF"]="32767"
+["X7fff"]="X32767" ["X7ffF"]="X32767" ["XFABC"]="64188"
+["XFFFF"]="65535" ["X10000"]="65536" ["X12345"]="74565" ["XABCDE"]="703710"
+["X12345678"]="305419896" ["X7A3B4C6D"]="2050706541" ["X7a3B4c6D"]="2050706541"
+["X7FFFFFFF"]="2147483647" ["X87654321"]="2271560481" ["X8A6B7C5D"]="2322299997"
+["XFFFFFFFF"]="4294967295" ["X00"]="0" ["X00000000"]="0" ["X000A"]="10"
+["XA000"]="40960" ["X0000A"]="10" ["XA0000"]="655360"
+["X00000ABC"]="2748"  ["X4EF00000"]="1324351488"
+["\#"]="inv" ["X-123"]="inv" [""]="inv"
+["X"]="inv" ["1X"]="inv" ["X1"]="inv" ["1 X"]="inv"
+["12 34"]="inv" ["PQST"]="inv" ["pqst"]="inv"
+["ABCDEFGH"]="inv" ["abcdefgh"]="inv" ["AbcdEFgh"]="inv" ["1234@678"]="inv")
+
+for i in "$1"* #for every file in the passed directory
+do
+    echo "$i" #print out the name of the current file
+    for j in "${!MAP[@]}" #for every key in the map defined above[test inputs]
+    do
+        spim load "$i"      #load mips program
+        echo run         #run mips code
+        echo "$j"      #input the test inputs into the program
+        echo print "$a0"   #should print the string within the argument register at the end of the program
+                    # check if the result matches the value in the map. If so the output is correct.
+        if ["${MAP[@]}" -eq "$a0"]; then
+            echo "TRUE";
+            exit;
+        fi
+        echo reinitialize
+    done
+done
