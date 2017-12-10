@@ -43,7 +43,7 @@ do
         #printf ${myvar##*s} \n
         myvar=$(echo "${inputs[$j]}" | spim load $i) 
         #printf "${inputs[$j]}"
-        printf ${myvar##*s}
+        printf "${myvar##*s}"
         printf '\n'
     done
 done
