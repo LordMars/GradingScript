@@ -1,5 +1,4 @@
 #!/bin/bash
-declare -A inputs
 inputs=( 0ABcdE,FFfFFffF,000000000,1234@678,,"EA,","pqst,","123456789,",
 "eA,",",pqst",",234567890"," ,",", "," , ","EA, ","pqst, ",
 "123456789,[space]","[space],eA",",pqst",",234567890",",,"," , , ",
